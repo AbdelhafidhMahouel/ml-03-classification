@@ -25,7 +25,9 @@ See [docs/your-files.md] for more.
 
 Links:
 
-- [ml_03_case.ipynb](notebooks/ml_03_case.ipynb)
+- [ml_03_case.ipynb](notebooks/ml_03_case.ipynb) - original working example (penguins classification)
+- [ml-03-abdel.ipynb](notebooks/ml-03-abdel.ipynb) - Phase 4 modification: added a `bill_ratio` feature, a normalized confusion matrix, and a saved classification report CSV
+- [batch_quality_abdel.ipynb](notebooks/batch_quality_abdel.ipynb) - Phase 5 custom project: classifies manufacturing batches as pass/fail based on in-process measurements
 
 ## Working Files
 
@@ -112,6 +114,12 @@ uvx pre-commit run --all-files
 # run the example module to verify the environment (.venv/)
 uv run python -m mlstudio.app_case
 
+# run my Phase 4 modification (adds engagement_score feature + residual chart + CSV report)
+uv run python -m mlstudio.app_abdel
+
+# run my Phase 5 custom project (manufacturing batch pass/fail classification)
+uv run python -m mlstudio.app_batch_abdel
+
 # run common chores
 uv run ruff format .
 uv run ruff check . --fix
@@ -142,7 +150,7 @@ You accidentally started Python interactive mode.
 It happens.
 Press `Ctrl+c` (both keys together) or `Ctrl+Z` then `Enter` on Windows.
 
-## Example Output (Can Remove this Section after You Verify)
+## Example Output
 
 ```shell
 | INFO | ML | Summarize workflow........
@@ -166,26 +174,16 @@ Press `Ctrl+c` (both keys together) or `Ctrl+Z` then `Enter` on Windows.
 
 ## Findings and Visuals
 
-Take screenshots of your charts and provide them here with a discussion.
-In Markdown, display a figure by using:
-an exclamation mark immediately followed by square brackets containing a useful caption
-immediately followed by parentheses containing the relative path to your figure.
-Note: When you start typing the path with a dot (.) for "here, in this directory",
-the IDE may help complete the path.
+## Findings and Visuals
 
-In your custom project, follow this example, but
+For my Phase 5 custom project, I trained a DecisionTreeClassifier to predict
+whether a manufacturing batch passes or fails final spec compliance testing,
+based on in-process measurements like mixing time, process temperature, pH,
+and viscosity.
 
-- your figures and narrative should reflect your work,
-- this `README.md` should include your commands, process, and visuals, and
-- `docs/index.md` should include your narrative.
+![Confusion matrix showing correct and incorrect pass/fail predictions on the test set](./docs/images/batch_confusion_matrix.png)
 
-Remove unnecessary instructional comments in your custom files.
-
-Update figures to present interesting results from your custom project:
-
-![Provide a Useful Caption](./docs/images/Figure_1.png)
-
-![Provide a Useful Caption](./docs/images/Figure_2.png)
+![Feature importance chart showing which in-process measurements most strongly predict batch outcome](./docs/images/batch_feature_importance.png)
 
 ## Project Documentation
 
